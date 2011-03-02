@@ -126,19 +126,20 @@ class Mooquee4ward extends Hybrid
 	 * Browse the directory structure and fetch all albums
 	 * @param string
 	 */
-	protected function fetchImages($url)
+	protected function fetchImages($file)
 	{
-		if(is_dir(TL_ROOT . '/' . $url))
+		if(is_dir(TL_ROOT . '/' . $file))
 		{
-			$this->parseMetaFile($url);
+			$this->parseMetaFile($file);
 			// Scan folder an sort resources
-			$images = scan(TL_ROOT . '/' . $url);
+			$images = scan(TL_ROOT . '/' . $file);
 			natcasesort($images);
+			foreach($images as $k=>$img) $images[$k] = $file.'/'.$img;
 			$images = array_values($images);
 		}
 		else 
 		{
-			$images = array($url);
+			$images = array($file);
 		}
 		
 
@@ -152,12 +153,12 @@ class Mooquee4ward extends Hybrid
 			}
 
 			// Dont add subfolder
-			if (is_dir(TL_ROOT . '/' . $url . '/' . $images[$i]))
+			if (is_dir(TL_ROOT .  '/' . $images[$i]))
 			{
 				continue;
 			}
 
-			$objFile = new File($url . '/' . $images[$i]);
+			$objFile = new File($images[$i]);
 
 			// Skip non-image files
 			if (!$objFile->isGdImage)
@@ -169,7 +170,7 @@ class Mooquee4ward extends Hybrid
 			(
 				'title' => strlen($this->arrMeta[$objFile->basename][0]) ? $this->arrMeta[$objFile->basename][0] : ucfirst(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename))),
 				'timestamp' => $objFile->mtime,
-				'image' => $url . '/' . $images[$i]
+				'image' => $images[$i]
 			);
 		}
 		
