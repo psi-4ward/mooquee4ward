@@ -42,11 +42,6 @@ class Mooquee4ward extends Hybrid
 	 */
 	public function generate()
 	{
-		if (!strlen($this->multiSRC))
-		{
-			return 'Please choose some Images';
-		}
-
 		if (TL_MODE == 'BE')
 		{
 			$objTemplate = new BackendTemplate('be_wildcard');
@@ -72,7 +67,6 @@ class Mooquee4ward extends Hybrid
 		$GLOBALS['TL_JAVASCRIPT']['mooquee4ward'] = 'system/modules/mooquee4ward/html/Mooquee1.1.js';
 		
 		// fetch images
-		
 		$images = array();
 		$multiSRC = unserialize($this->multiSRC);
 		foreach($multiSRC as $file)

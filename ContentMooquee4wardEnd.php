@@ -29,7 +29,12 @@
 
 class ContentMooquee4wardEnd extends Mooquee4ward
 {
-
+	/**
+	 * Table holding the params
+	 * @var string
+	 */
+	protected $strTable = 'tl_content';
+	
 	/**
 	 * Template
 	 * @var string
@@ -63,12 +68,12 @@ class ContentMooquee4wardEnd extends Mooquee4ward
 		$GLOBALS['TL_JAVASCRIPT']['mooquee4ward'] = 'system/modules/mooquee4ward/html/Mooquee1.1.js';
 		
 		// find start element
-		$objStart = $this->Database->prepare('SELECT * FROM tl_content WHERE pid=? AND type="mooquee4wardStart" ORDER BY SORTING DESC')
-							->limit(1)->execute($this->pid);
-							
+		$objStart = $this->Database->prepare('SELECT * FROM tl_content WHERE id=?')
+							->limit(1)->execute($this->mooquee4wardRelatedCE);
 		if($objStart->numRows != 1) return;
 		
 		$this->addMooqueeParams($objStart);
+		$this->Template->startId = $this->mooquee4wardRelatedCE;
 	}
 }
 
