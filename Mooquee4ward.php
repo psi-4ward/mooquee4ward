@@ -83,7 +83,7 @@ class Mooquee4ward extends Hybrid
 		$this->addMooqueeParams($this);
 		
 		$this->Template->images = $images;
-		$this->Template->firstitem = ($data->mooquee4wardFirstitem == 'random') ? array_rand($images) : $this->mooquee4wardFirstitem;
+		$this->Template->firstitem = ($this->mooquee4wardFirstitem == 'random') ? array_rand($images) : $this->mooquee4wardFirstitem;
 		
 	}
 
