@@ -31,5 +31,7 @@
  * Content Elements
  */
 $GLOBALS['TL_LANG']['CTE']['mooquee4ward'] = array('Mooquee4ward', 'Erzeugt ein Merquee-Laufband.');
+$GLOBALS['TL_LANG']['CTE']['mooquee4wardStart'] = array('Mooquee4ward START', 'Erzeugt ein Startelement für das Merquee-Laufband.');
+$GLOBALS['TL_LANG']['CTE']['mooquee4wardEnd'] = array('Mooquee4ward END', 'Erzeugt ein Endelement für das Merquee-Laufband.');
 
 ?>

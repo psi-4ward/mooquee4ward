@@ -31,5 +31,11 @@
  * Add content element
  */
 $GLOBALS['TL_CTE']['images']['mooquee4ward'] = 'ContentMooquee4ward';
+$GLOBALS['TL_CTE']['images']['mooquee4wardStart'] = 'ContentMooquee4wardStart';
+$GLOBALS['TL_CTE']['images']['mooquee4wardEnd'] = 'ContentMooquee4wardEnd';
 
+/**
+ * Add content module
+ */
+$GLOBALS['FE_MOD']['miscellaneous']['mooquee4ward'] = 'ModuleMooquee4ward';
 ?>

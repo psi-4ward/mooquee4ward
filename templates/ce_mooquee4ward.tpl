@@ -5,24 +5,21 @@
 <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
 <?php endif; ?>
 
-<div class="mooqueeWrapper">
-	<div id="mooquee<?php echo $this->id;?>" class="mooquee" style="height:<?php echo $this->height+10;?>px;">
-		<?php foreach($this->images as $img):?>
-		<div class="mooquee_item" style="height:<?php echo $this->height+10;?>px;">
-		<img src="<?php echo $img['image']; ?>" alt="" />
-		</div>
-		<?php endforeach;?>
-		<?php if($this->showNav):?>
-		<div class="mooqueeNav">
-			<?php for($i=0; $i<count($this->images);$i++):?>
-			<a onclick="objMooquee<?php echo $this->id;?>.moove(<?php echo $i;?>);return false;" href="#" class="<?php if($this->firstitem == $i) echo 'active';?>"><?php echo $i;?></a>
-			<?php endfor;?>
-		</div>
-		<?php endif;?>
+<div id="mooquee<?php echo $this->id;?>" class="mooquee" style="height:<?php echo $this->height+10;?>px;">
+	<?php foreach($this->images as $img):?>
+	<div class="mooquee_item" style="height:<?php echo $this->height+10;?>px;">
+	<img src="<?php echo $img['image']; ?>" alt="" />
 	</div>
+	<?php endforeach;?>
+	<?php if($this->showNav):?>
+	<div class="mooqueeNav">
+		<?php for($i=0; $i<count($this->images);$i++):?>
+		<a onclick="objMooquee<?php echo $this->id;?>.moove(<?php echo $i;?>);return false;" href="#" class="<?php if($this->firstitem == $i) echo 'active';?>"><?php echo $i;?></a>
+		<?php endfor;?>
+	</div>
+	<?php endif;?>
 </div>
         
-<!-- indexer::stop -->
 <script type="text/javascript">
 window.addEvent('domready',function(){
 	objMooquee<?php echo $this->id;?> = new Mooquee({
@@ -45,6 +42,5 @@ window.addEvent('domready',function(){
 			
 });
 </script>
-<!-- indexer::continue -->
 
 </div>
