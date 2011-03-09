@@ -9,7 +9,13 @@
 	<div id="mooquee<?php echo $this->id;?>" class="mooquee" style="height:<?php echo $this->height+10;?>px;">
 		<?php foreach($this->images as $img):?>
 		<div class="mooquee_item" style="height:<?php echo $this->height+10;?>px;">
+		<?php if($img['link']): ?>
+		<a href="<?php echo $img['link']; ?>">
+		<?php endif; ?>
 		<img src="<?php echo $img['image']; ?>" alt="" />
+		<?php if($img['link']): ?>
+		</a>
+		<?php endif; ?>
 		</div>
 		<?php endforeach;?>
 		<?php if($this->showNav):?>

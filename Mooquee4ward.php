@@ -164,7 +164,9 @@ class Mooquee4ward extends Hybrid
 			(
 				'title' => strlen($this->arrMeta[$objFile->basename][0]) ? $this->arrMeta[$objFile->basename][0] : ucfirst(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename))),
 				'timestamp' => $objFile->mtime,
-				'image' => $images[$i]
+				'image' => $images[$i],
+				'link' => $this->arrMeta[$objFile->basename][1],
+				'description' => $this->arrMeta[$objFile->basename][2],
 			);
 		}
 		
