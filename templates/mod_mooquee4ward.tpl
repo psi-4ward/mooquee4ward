@@ -10,9 +10,9 @@
 		<?php foreach($this->images as $img):?>
 		<div class="mooquee_item" style="height:<?php echo $this->height+10;?>px;">
 		<?php if($img['link']): ?>
-		<a href="<?php echo $img['link']; ?>">
+		<a title="<?php echo $img['title'].'::'.$img['description'];?>" href="<?php echo $img['link']; ?>"<?php if($this->fullsize):?>rel="lightbox[mooquee4ward<?php echo $this->id;?>]"<?php endif;?>>
 		<?php endif; ?>
-		<img src="<?php echo $img['image']; ?>" alt="" />
+		<img src="<?php echo $img['image']; ?>" alt="<?php echo $img['title'];?>" />
 		<?php if($img['link']): ?>
 		</a>
 		<?php endif; ?>

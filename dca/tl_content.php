@@ -30,7 +30,7 @@
 /**
  * Add palette
  */
-$GLOBALS['TL_DCA']['tl_content']['palettes']['mooquee4ward'] = '{type_legend},type,headline;{mooquee4wardLegend},mooquee4wardTransin,mooquee4wardTransout,mooquee4wardTransition1,mooquee4wardTransition2,mooquee4wardDuration,mooquee4wardPause,mooquee4wardSize,mooquee4wardFirstitem,mooquee4wardPauseOnHover,mooquee4wardShowNav;{source_legend},multiSRC;{expert_legend:hide},cssID,space';
+$GLOBALS['TL_DCA']['tl_content']['palettes']['mooquee4ward'] = '{type_legend},type,headline;{mooquee4wardLegend},mooquee4wardTransin,mooquee4wardTransout,mooquee4wardTransition1,mooquee4wardTransition2,mooquee4wardDuration,mooquee4wardPause,mooquee4wardSize,mooquee4wardFirstitem,mooquee4wardPauseOnHover,mooquee4wardShowNav,fullsize;{source_legend},multiSRC;{expert_legend:hide},cssID,space';
 
 $GLOBALS['TL_DCA']['tl_content']['palettes']['mooquee4wardStart'] = '{type_legend},type;{mooquee4wardLegend},mooquee4wardTransin,mooquee4wardTransout,mooquee4wardTransition1,mooquee4wardTransition2,mooquee4wardDuration,mooquee4wardPause,mooquee4wardSize,mooquee4wardPauseOnHover,mooquee4wardShowNav;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['mooquee4wardEnd'] = '{type_legend},type;{expert_legend:hide},cssID,space';

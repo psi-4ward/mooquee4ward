@@ -30,7 +30,7 @@
 /**
  * Add palette
  */
-$GLOBALS['TL_DCA']['tl_module']['palettes']['mooquee4ward'] = '{type_legend},name,type,headline;{mooquee4wardLegend},mooquee4wardTransin,mooquee4wardTransout,mooquee4wardTransition1,mooquee4wardTransition2,mooquee4wardDuration,mooquee4wardPause,mooquee4wardSize,mooquee4wardFirstitem,mooquee4wardPauseOnHover,mooquee4wardShowNav;{source_legend},multiSRC;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['mooquee4ward'] = '{type_legend},name,type,headline;{mooquee4wardLegend},mooquee4wardTransin,mooquee4wardTransout,mooquee4wardTransition1,mooquee4wardTransition2,mooquee4wardDuration,mooquee4wardPause,mooquee4wardSize,mooquee4wardFirstitem,mooquee4wardPauseOnHover,mooquee4wardShowNav,fullsize;{source_legend},multiSRC;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['mooquee4wardDuration'] = array

@@ -98,6 +98,7 @@ class Mooquee4ward extends Hybrid
 		$this->Template->pauseOnHover = (($data->mooquee4wardPauseOnHover == '1') ? 'true' : 'false');
 		$this->Template->showNav = $data->mooquee4wardShowNav == '1';
 		$this->Template->firstitem = '0';
+		$this->Template->fullsize = $data->fullsize;
 		
 		$trans = $data->mooquee4wardTransition1;
 		if($data->mooquee4wardTransition1 == 'linear')
@@ -165,7 +166,7 @@ class Mooquee4ward extends Hybrid
 				'title' => strlen($this->arrMeta[$objFile->basename][0]) ? $this->arrMeta[$objFile->basename][0] : ucfirst(str_replace('_', ' ', preg_replace('/^[0-9]+_/', '', $objFile->filename))),
 				'timestamp' => $objFile->mtime,
 				'image' => $images[$i],
-				'link' => $this->arrMeta[$objFile->basename][1],
+				'link' => (!strlen($this->arrMeta[$objFile->basename][1]) && $this->fullsize) ? $images[$i] : $this->arrMeta[$objFile->basename][1],
 				'description' => $this->arrMeta[$objFile->basename][2],
 			);
 		}
