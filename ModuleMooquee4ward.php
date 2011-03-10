@@ -42,6 +42,11 @@ class ModuleMooquee4ward extends Mooquee4ward
 	 */
 	protected $strTemplate = 'mod_mooquee4ward';
 
+	public function generate()
+	{
+		$this->size = $this->imgSize;
+		return parent::generate();
+	}
 }
 
 ?>

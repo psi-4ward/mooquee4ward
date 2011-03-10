@@ -88,8 +88,9 @@ class Mooquee4ward extends Hybrid
 	protected function addMooqueeParams($data)
 	{
 		$size = unserialize($data->mooquee4wardSize);
-		$this->Template->width = $size[0];
-		$this->Template->height = $size[1];
+		$style = (strlen($size[0])) ? 'width:'.$size[0].'px;' : '';
+		$style .= (strlen($size[1])) ? 'height:'.$size[1].'px;' : '';
+		$this->Template->sizeStyle = $style; 
 		
 		$this->Template->duration = $data->mooquee4wardDuration;
 		$this->Template->transin = $data->mooquee4wardTransin;
@@ -99,6 +100,8 @@ class Mooquee4ward extends Hybrid
 		$this->Template->showNav = $data->mooquee4wardShowNav == '1';
 		$this->Template->firstitem = '0';
 		$this->Template->fullsize = $data->fullsize;
+		$imgSize = unserialize($this->size);
+		$this->Template->imgSize = (strlen($imgSize[0]) || strlen($imgSize[1])) ? $imgSize : false;
 		
 		$trans = $data->mooquee4wardTransition1;
 		if($data->mooquee4wardTransition1 == 'linear')

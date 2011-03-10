@@ -30,7 +30,7 @@
 /**
  * Add palette
  */
-$GLOBALS['TL_DCA']['tl_module']['palettes']['mooquee4ward'] = '{type_legend},name,type,headline;{mooquee4wardLegend},mooquee4wardTransin,mooquee4wardTransout,mooquee4wardTransition1,mooquee4wardTransition2,mooquee4wardDuration,mooquee4wardPause,mooquee4wardSize,mooquee4wardFirstitem,mooquee4wardPauseOnHover,mooquee4wardShowNav,fullsize;{source_legend},multiSRC;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
+$GLOBALS['TL_DCA']['tl_module']['palettes']['mooquee4ward'] = '{type_legend},name,type,headline;{mooquee4wardLegend},mooquee4wardTransin,mooquee4wardTransout,mooquee4wardTransition1,mooquee4wardTransition2,mooquee4wardDuration,mooquee4wardPause,mooquee4wardSize,mooquee4wardFirstitem,mooquee4wardPauseOnHover,mooquee4wardShowNav,fullsize,imgSize;{source_legend},multiSRC;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 
 
 $GLOBALS['TL_DCA']['tl_module']['fields']['mooquee4wardDuration'] = array
@@ -54,7 +54,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['mooquee4wardSize'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['mooquee4wardSize'],
 	'exclude'                 => true,
 	'inputType'               => 'text',
-	'default'				  => serialize(array('500','50')),
+	'default'				  => serialize(array('400','200')),
 	'eval'                    => array('mandatory'=>true,'tl_class'=>'w50','size'=>2,'multiple'=>true)
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['mooquee4wardTransin'] = array

@@ -5,27 +5,25 @@
 <<?php echo $this->hl; ?>><?php echo $this->headline; ?></<?php echo $this->hl; ?>>
 <?php endif; ?>
 
-<div class="mooqueeWrapper">
-	<div id="mooquee<?php echo $this->id;?>" class="mooquee" style="height:<?php echo $this->height+10;?>px;">
-		<?php foreach($this->images as $img):?>
-		<div class="mooquee_item" style="height:<?php echo $this->height+10;?>px;">
-		<?php if($img['link']): ?>
-		<a title="<?php echo $img['title'].'::'.$img['description'];?>" href="<?php echo $img['link']; ?>"<?php if($this->fullsize):?>rel="lightbox[mooquee4ward<?php echo $this->id;?>]"<?php endif;?>>
-		<?php endif; ?>
-		<img src="<?php echo $img['image']; ?>" alt="<?php echo $img['title'];?>" />
-		<?php if($img['link']): ?>
-		</a>
-		<?php endif; ?>
-		</div>
-		<?php endforeach;?>
-		<?php if($this->showNav):?>
-		<div class="mooqueeNav">
-			<?php for($i=0; $i<count($this->images);$i++):?>
-			<a onclick="objMooquee<?php echo $this->id;?>.moove(<?php echo $i;?>);return false;" href="#" class="<?php if($this->firstitem == $i) echo 'active';?>"><?php echo $i;?></a>
-			<?php endfor;?>
-		</div>
-		<?php endif;?>
+<div id="mooquee<?php echo $this->id;?>" class="mooquee" style="<?php echo $this->sizeStyle;?>">
+	<?php foreach($this->images as $img):?>
+	<div class="mooquee_item" style="<?php echo $this->sizeStyle;?>">
+	<?php if($img['link']): ?>
+	<a title="<?php echo $img['title'].'::'.$img['description'];?>" href="<?php echo $img['link']; ?>"<?php if($this->fullsize):?>rel="lightbox[mooquee4ward<?php echo $this->id;?>]"<?php endif;?>>
+	<?php endif; ?>
+	<img src="<?php echo (($this->imgSize) ? $this->getImage($img['image'],$this->imgSize[0],$this->imgSize[1],$this->imgSize[2]) : $img['image']); ?>" alt="<?php echo $img['title'];?>"/>
+	<?php if($img['link']): ?>
+	</a>
+	<?php endif; ?>
 	</div>
+	<?php endforeach;?>
+	<?php if($this->showNav):?>
+	<div class="mooqueeNav">
+		<?php for($i=0; $i<count($this->images);$i++):?>
+		<a onclick="objMooquee<?php echo $this->id;?>.moove(<?php echo $i;?>);return false;" href="#" class="<?php if($this->firstitem == $i) echo 'active';?>"><?php echo $i;?></a>
+		<?php endfor;?>
+	</div>
+	<?php endif;?>
 </div>
         
 <!-- indexer::stop -->
