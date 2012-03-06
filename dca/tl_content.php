@@ -94,7 +94,7 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['mooquee4wardTransition2'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['mooquee4wardTransition2'],
 	'exclude'                 => true,
-	'inputType'               => 'radio',
+	'inputType'               => 'select',
 	'default'				  => 'inOut',
 	'options'				  => array('in'=>'in','out'=>'out','inOut'=>'inOut'),
 	'eval'                    => array('mandatory'=>true,'tl_class'=>'w50')

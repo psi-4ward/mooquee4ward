@@ -11,7 +11,7 @@
 	<?php if($img['link']): ?>
 	<a title="<?php echo $img['title'].'::'.$img['description'];?>" href="<?php echo $img['link']; ?>"<?php if($this->fullsize):?>rel="lightbox[mooquee4ward<?php echo $this->id;?>]"<?php endif;?>>
 	<?php endif; ?>
-	<img src="<?php echo (($this->imgSize) ? $this->getImage($img['image'],$this->imgSize[0],$this->imgSize[1],$this->imgSize[2]) : $img['image']); ?>" alt="<?php echo $img['title'];?>">
+	<img src="<?php echo (($this->imgSize) ? $this->getImage($img['image'],$this->imgSize[0],$this->imgSize[1],$this->imgSize[2]) : $img['image']); ?>" alt="<?php echo $img['title'];?>"/>
 	<?php if($img['link']): ?>
 	</a>
 	<?php endif; ?>
@@ -27,7 +27,7 @@
 </div>
         
 <!-- indexer::stop -->
-<script type="text/javascript">
+<script>
 window.addEvent('domready',function(){
 	objMooquee<?php echo $this->id;?> = new Mooquee({
 		element:'mooquee<?php echo $this->id;?>',

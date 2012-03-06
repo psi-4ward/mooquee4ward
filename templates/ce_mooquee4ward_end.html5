@@ -1,9 +1,8 @@
 </div>
 
-<script type="text/javascript">
-<!--//--><![CDATA[//><!--
+<script>
 window.addEvent('domready',function(){
-	$$('#mooquee<?php echo $this->startId;?> > div').addClass('mooquee_item');
+	$$('#mooquee<?php echo $this->startId;?> > div, #mooquee<?php echo $this->startId;?> > section').addClass('mooquee_item');
 
 	<?php if($this->showNav):?>
 		var mooqueeNav = new Element('div',{'class':'mooqueeNav'});
@@ -38,5 +37,4 @@ window.addEvent('domready',function(){
 	});		
 
 });
-//--><!]]>
 </script>
