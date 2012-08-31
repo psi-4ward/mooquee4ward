@@ -179,25 +179,34 @@ class tl_content_mooquee4ward extends System
 		}
 		else
 		{
+
+			$arrSet = array
+			(
+				'pid' 						=> $dc->activeRecord->pid,
+				'type'						=> 'mooquee4wardStart',
+				'tstamp' 					=> time(),
+				'sorting' 					=> $dc->activeRecord->sorting-1,
+				'mooquee4wardDuration' 		=> 2000,
+				'mooquee4wardPause' 		=> 500,
+				'mooquee4wardFirstitem' 	=> 0,
+				'mooquee4wardSize'			=> serialize(array('400','200')),
+				'mooquee4wardTransin'		=> 'left',
+				'mooquee4wardTransout'		=> 'fade',
+				'mooquee4wardTransition1'	=> 'quad',
+				'mooquee4wardTransition2'	=> 'inOut',
+				'mooquee4wardPauseOnHover'	=> '0',
+				'mooquee4wardShowNav'		=> '0',
+				'mooquee4wardRelatedCE' 	=> $dc->id
+			);
+
+			if(in_array('GlobalContentelements',$this->Config->getActiveModules()))
+	        {
+			     $arrSet['do'] = $this->Input->get('do');
+	        }
+
 			// create start-element
 			$objErg = $this->Database->prepare('INSERT INTO tl_content %s')
-							->set(array(
-								'pid' 		=> $dc->activeRecord->pid,
-								'type'		=> 'mooquee4wardStart',
-								'tstamp' 	=> time(),
-								'sorting' 	=> $dc->activeRecord->sorting-1,
-								'mooquee4wardDuration' 	=> 2000,
-								'mooquee4wardPause' 	=> 500,
-								'mooquee4wardFirstitem' => 0,
-								'mooquee4wardSize'		=> serialize(array('400','200')),
-								'mooquee4wardTransin'	=> 'left',
-								'mooquee4wardTransout'	=> 'fade',
-								'mooquee4wardTransition1'=> 'quad',
-								'mooquee4wardTransition2'=> 'inOut',
-								'mooquee4wardPauseOnHover'=> '0',
-								'mooquee4wardShowNav'	=> '0',
-								'mooquee4wardRelatedCE' => $dc->id
-							))->execute();
+							->set($arrSet)->execute();
 		} 						
 		$this->Database->prepare('UPDATE tl_content SET mooquee4wardRelatedCE=? WHERE id=?')
 					->execute($objErg->insertId,$dc->id);
