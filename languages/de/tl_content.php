@@ -29,6 +29,7 @@ if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 $GLOBALS['TL_LANG']['tl_content']['mooquee4wardLegend'] = "Mooquee4ward Einstellungen";
 
+$GLOBALS['TL_LANG']['tl_content']['useMooquee4ward']		  = array('Mooquee4ward','Hier kann der Mooquee4ward-Slider für dieses Element aktiviert werden.');
 $GLOBALS['TL_LANG']['tl_content']['mooquee4wardDuration'] 	  = array('Dauer','Hier können Sie die Dauer des Effekts in Millisekunden festlegen.');
 $GLOBALS['TL_LANG']['tl_content']['mooquee4wardPause'] 		  = array('Warten','Es wird eine in Millisekunden angegebene Pause zwischen den Slides eingefügt.');
 $GLOBALS['TL_LANG']['tl_content']['mooquee4wardSize'] 		  = array('Breite / Höhe','Legen Sie hier die Breite und Höhe in Pixel für des Laufbands fest.');

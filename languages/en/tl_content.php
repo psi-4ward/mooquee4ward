@@ -29,6 +29,7 @@ if (!defined('TL_ROOT')) die('You can not access this file directly!');
 
 $GLOBALS['TL_LANG']['tl_content']['mooquee4wardLegend'] = "Mooquee4ward config";
 
+$GLOBALS['TL_LANG']['tl_content']['useMooquee4ward']		  = array('Mooquee4ward','Activate the mooquee4ward slider for this element.');
 $GLOBALS['TL_LANG']['tl_content']['mooquee4wardDuration'] 	  = array('Duration','Set the effekt duration in milliseconds.');
 $GLOBALS['TL_LANG']['tl_content']['mooquee4wardPause'] 		  = array('Pause','Make a break of given milliseconds between the images.');
 $GLOBALS['TL_LANG']['tl_content']['mooquee4wardSize'] 		  = array('Width / Height','Set the width and height of the images in pixel.');

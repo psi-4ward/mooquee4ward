@@ -72,8 +72,19 @@ class ContentMooquee4wardEnd extends Mooquee4ward
 							->limit(1)->execute($this->mooquee4wardRelatedCE);
 		if($objStart->numRows != 1) return;
 		
-		$this->addMooqueeParams($objStart);
 		$this->Template->startId = $this->mooquee4wardRelatedCE;
+
+		$this->Template->mooquee4wardSize = $objStart->mooquee4wardSize;
+		$this->Template->mooquee4wardDuration = $objStart->mooquee4wardDuration;
+		$this->Template->mooquee4wardTransin = $objStart->mooquee4wardTransin;
+		$this->Template->mooquee4wardTransout = $objStart->mooquee4wardTransout;
+		$this->Template->mooquee4wardPause = $objStart->mooquee4wardPause;
+		$this->Template->mooquee4wardPauseOnHover = $objStart->mooquee4wardPauseOnHover;
+		$this->Template->mooquee4wardShowNav = $objStart->mooquee4wardShowNav;
+		$this->Template->fullsize = $objStart->fullsize;
+		$this->Template->mooquee4wardTransition1 = $objStart->mooquee4wardTransition1;
+		$this->Template->mooquee4wardTransition2 = $objStart->mooquee4wardTransition2;
+
 	}
 }
 

@@ -35,7 +35,23 @@ $GLOBALS['TL_DCA']['tl_content']['palettes']['mooquee4ward'] = '{type_legend},ty
 $GLOBALS['TL_DCA']['tl_content']['palettes']['mooquee4wardStart'] = '{type_legend},type;{mooquee4wardLegend},mooquee4wardTransin,mooquee4wardTransout,mooquee4wardTransition1,mooquee4wardTransition2,mooquee4wardDuration,mooquee4wardPause,mooquee4wardSize,mooquee4wardPauseOnHover,mooquee4wardShowNav;{protected_legend:hide},protected;{expert_legend:hide},guests,cssID,space';
 $GLOBALS['TL_DCA']['tl_content']['palettes']['mooquee4wardEnd'] = '{type_legend},type;{expert_legend:hide},cssID,space';
 
+/**
+ * Subpalette for usage in other modules
+ */
+$GLOBALS['TL_DCA']['tl_content']['palettes']['__selector__'][] = 'useMooquee4ward';
+$GLOBALS['TL_DCA']['tl_content']['subpalettes']['useMooquee4ward'] = 'mooquee4wardTransin,mooquee4wardTransout,mooquee4wardTransition1,mooquee4wardTransition2,mooquee4wardDuration,mooquee4wardPause,mooquee4wardSize,mooquee4wardPauseOnHover,mooquee4wardShowNav';
 
+
+/**
+ * Fields
+ */
+$GLOBALS['TL_DCA']['tl_content']['fields']['useMooquee4ward'] = array
+(
+	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['useMooquee4ward'],
+	'exclude'                 => true,
+	'inputType'               => 'checkbox',
+	'eval'                    => array('tl_class'=>'','submitOnChange'=>true)
+);
 $GLOBALS['TL_DCA']['tl_content']['fields']['mooquee4wardDuration'] = array
 (
 	'label'                   => &$GLOBALS['TL_LANG']['tl_content']['mooquee4wardDuration'],
@@ -163,34 +179,25 @@ class tl_content_mooquee4ward extends System
 		}
 		else
 		{
-
-			$arrSet = array
-			(
-				'pid' 						=> $dc->activeRecord->pid,
-				'type'						=> 'mooquee4wardStart',
-				'tstamp' 					=> time(),
-				'sorting' 					=> $dc->activeRecord->sorting-1,
-				'mooquee4wardDuration' 		=> 2000,
-				'mooquee4wardPause' 		=> 500,
-				'mooquee4wardFirstitem' 	=> 0,
-				'mooquee4wardSize'			=> serialize(array('400','200')),
-				'mooquee4wardTransin'		=> 'left',
-				'mooquee4wardTransout'		=> 'fade',
-				'mooquee4wardTransition1'	=> 'quad',
-				'mooquee4wardTransition2'	=> 'inOut',
-				'mooquee4wardPauseOnHover'	=> '0',
-				'mooquee4wardShowNav'		=> '0',
-				'mooquee4wardRelatedCE' 	=> $dc->id
-			);
-
-			if(in_array('GlobalContentelements',$this->Config->getActiveModules()))
-	        {
-			     $arrSet['do'] = $this->Input->get('do');
-	        }
-
 			// create start-element
 			$objErg = $this->Database->prepare('INSERT INTO tl_content %s')
-							->set($arrSet)->execute();
+							->set(array(
+								'pid' 		=> $dc->activeRecord->pid,
+								'type'		=> 'mooquee4wardStart',
+								'tstamp' 	=> time(),
+								'sorting' 	=> $dc->activeRecord->sorting-1,
+								'mooquee4wardDuration' 	=> 2000,
+								'mooquee4wardPause' 	=> 500,
+								'mooquee4wardFirstitem' => 0,
+								'mooquee4wardSize'		=> serialize(array('400','200')),
+								'mooquee4wardTransin'	=> 'left',
+								'mooquee4wardTransout'	=> 'fade',
+								'mooquee4wardTransition1'=> 'quad',
+								'mooquee4wardTransition2'=> 'inOut',
+								'mooquee4wardPauseOnHover'=> '0',
+								'mooquee4wardShowNav'	=> '0',
+								'mooquee4wardRelatedCE' => $dc->id
+							))->execute();
 		} 						
 		$this->Database->prepare('UPDATE tl_content SET mooquee4wardRelatedCE=? WHERE id=?')
 					->execute($objErg->insertId,$dc->id);

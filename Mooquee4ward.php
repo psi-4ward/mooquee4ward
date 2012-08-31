@@ -74,52 +74,13 @@ class Mooquee4ward extends Hybrid
 			$images = array_merge($images,$this->fetchImages($file));
 		}
 		
-		$this->addMooqueeParams($this);
-		
 		$this->Template->images = $images;
-		$this->Template->firstitem = ($this->mooquee4wardFirstitem == 'random') ? array_rand($images) : $this->mooquee4wardFirstitem;
+		$this->Template->mooquee4wardFirstitem = ($this->mooquee4wardFirstitem == 'random') ? array_rand($images) : $this->mooquee4wardFirstitem;
 		
 	}
 
 
-	/**
-	 * Adds the mooquee params to the template
-	 */
-	protected function addMooqueeParams($data)
-	{
-		$size = unserialize($data->mooquee4wardSize);
-		$style = (strlen($size[0])) ? 'width:'.$size[0].'px;' : '';
-		$style .= (strlen($size[1])) ? 'height:'.$size[1].'px;' : '';
-		$this->Template->sizeStyle = $style; 
-		
-		$this->Template->duration = $data->mooquee4wardDuration;
-		$this->Template->transin = $data->mooquee4wardTransin;
-		$this->Template->transout = $data->mooquee4wardTransout;
-		$this->Template->pause = $data->mooquee4wardPause;
-		$this->Template->pauseOnHover = (($data->mooquee4wardPauseOnHover == '1') ? 'true' : 'false');
-		$this->Template->showNav = $data->mooquee4wardShowNav == '1';
-		$this->Template->firstitem = '0';
-		$this->Template->fullsize = $data->fullsize;
-		$imgSize = unserialize($this->size);
-		$this->Template->imgSize = (strlen($imgSize[0]) || strlen($imgSize[1])) ? $imgSize : false;
-		
-		$trans = $data->mooquee4wardTransition1;
-		if($data->mooquee4wardTransition1 == 'linear')
-		{
-			// dont add in/out to linear transition
-			$trans .= '';
-		}
-		elseif($data->mooquee4wardTransition2 == 'inOut')
-		{
-			$trans .= ':in:out';
-		}
-		else
-		{
-			$trans .= ':'.$data->mooquee4wardTransition2;	
-		}
-		$this->Template->transition = "'".$trans."'";		
-	}
-	
+
 	/**
 	 * Browse the directory structure and fetch all albums
 	 * @param string
@@ -175,6 +136,85 @@ class Mooquee4ward extends Hybrid
 		}
 		
 		return $erg;
+	}
+
+
+	public static function generateJavascript($objSettings)
+	{
+		$GLOBALS['TL_JAVASCRIPT']['mooquee4ward'] = 'system/modules/mooquee4ward/html/Mooquee1.1.js';
+
+		$trans = $objSettings->mooquee4wardTransition1;
+		if($objSettings->mooquee4wardTransition1 == 'linear')
+		{
+			// dont add in/out to linear transition
+			$trans .= '';
+		}
+		elseif($objSettings->mooquee4wardTransition2 == 'inOut')
+		{
+			$trans .= ':in:out';
+		}
+		else
+		{
+			$trans .= ':'.$objSettings->mooquee4wardTransition2;
+		}
+
+		$size = unserialize($objSettings->mooquee4wardSize);
+
+		$strJS = '
+<script type="text/javascript">
+	window.addEvent(\'domready\',function(){
+		$$(\'#mooquee'.$objSettings->id.'\').setStyles({
+			\'width\':\''.$size[0].'px\',
+			\'height\':\''.$size[1].'px\'
+		});
+		$$(\'#mooquee'.$objSettings->id.' > div\').addClass(\'mooquee_item\');
+
+';
+		if($objSettings->mooquee4wardShowNav)
+		{
+$strJS .= '
+		var mooqueeNav = new Element(\'div\',{\'class\':\'mooqueeNav\'});
+			for(var i=0; i<$$(\'#mooquee'.$objSettings->id.' > div\').length;i++){
+				new Element(\'a\',{
+					\'onclick\':\'objMooquee'.$objSettings->id.'.moove(\'+i+\');return false;\',
+					\'href\':\'#\',
+					\'class\':((i==0) ? \'active\' : \'\'),
+					\'text\':i
+				}).inject(mooqueeNav);
+				mooqueeNav.set(\'html\',mooqueeNav.get(\'html\')+\' \');
+			}
+			mooqueeNav.inject($(\'mooquee'.$objSettings->id.'\'));';
+		}
+
+$strJS .= '
+		objMooquee'.$objSettings->id.' = new Mooquee({
+			element:\'mooquee'.$objSettings->id.'\',
+			trans:{\'tin\':\''.$objSettings->mooquee4wardTransin.'\', \'tout\':\''.$objSettings->mooquee4wardTransout.'\'},
+			duration:'.$objSettings->mooquee4wardDuration.',
+			pause: '.$objSettings->mooquee4wardPause.',
+			firstitem:'.$objSettings->mooquee4wardFirstitem.',
+			pauseOnHover:'.(($objSettings->mooquee4wardPauseOnHover == '1') ? 'true' : 'false').',
+			transition:\''.$trans.'\',
+			';
+
+		if($objSettings->mooquee4wardShowNav)
+		{
+
+$strJS .= '			onTransitionComplete: function(ci,pi){
+				var els = $$(\'#mooquee'.$objSettings->id.' div.mooqueeNav a\');
+				els.removeClass(\'active\');
+				els[ci].addClass(\'active\');
+			},';
+		}
+
+$strJS .= 'startOnLoad:true
+		});
+
+	});
+	</script>
+	';
+
+		return $strJS;
 	}
 }
 

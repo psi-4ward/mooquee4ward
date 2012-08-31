@@ -60,9 +60,7 @@ class ContentMooquee4wardStart extends ContentElement
 	 */
 	protected function compile()
 	{
-		$size = unserialize($this->mooquee4wardSize);
-		$this->Template->width = $size[0];
-		$this->Template->height = $size[1];		
+
 	}
 }
 
