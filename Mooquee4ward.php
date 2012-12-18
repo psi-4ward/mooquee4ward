@@ -76,7 +76,7 @@ class Mooquee4ward extends Hybrid
 		
 		$this->Template->images = $images;
 		$this->Template->mooquee4wardFirstitem = ($this->mooquee4wardFirstitem == 'random') ? array_rand($images) : $this->mooquee4wardFirstitem;
-		
+		$this->Template->imgSize = deserialize($this->size);
 	}
 
 

@@ -47,8 +47,8 @@ Mooquee = new Class({
 		pauseOnHover: true, //if true will pause all animations while mouse is hovering
 		onTransitionStart: function(){},// Executes on transition start
 		onTransitionComplete: function(curr){
-			// this.items.setStyle('z-index',100);
-			// this.items[curr].setStyle('z-index',1000);
+//			this.items.setStyle('z-index',100);
+//			this.items[curr].setStyle('z-index',1000);
 		}, // Executes on transition completion
 		onLoop: function(){}//Executes on full loop
 	},
@@ -88,14 +88,9 @@ Mooquee = new Class({
 			$(element).style.overflow = this.options.overflow;
 
 			if(i == this.currentitem)
-			{
-				this.itemFXs[i].set({left:0}); //.set(this.inStyle);
-
-			}
+				this.itemFXs[i].set(this.resetStyle).set(this.inStyle);
 			else
-			{
-				this.itemFXs[i].set(this.resetStyle);//; .set(this.startStyle);
-			}
+				this.itemFXs[i].set(this.resetStyle).set(this.startStyle);
 			i++;
 
 		}.bind(this));
@@ -160,19 +155,19 @@ Mooquee = new Class({
         switch(newTrans.tin){
                 case 'up':
                     this.startStyle = {'top': $(this.options.element).clientHeight};
-                    this.inStyle = {'top': [this.startStyle.left,0]};
+                    this.inStyle = {'top': 0};
                 break;
                 case 'down':
                     this.startStyle = {'top': $(this.options.element).clientHeight * -1};
-                    this.inStyle = {'top': [this.startStyle.left,0]};
+                    this.inStyle = {'top': 0};
                 break;
                 case 'left':
                     this.startStyle = {'left': $(this.options.element).clientWidth};
-                    this.inStyle = {'left': [this.startStyle.left,0]};
+                    this.inStyle = {'left': 0};
                 break;
                 case 'right':
                     this.startStyle = {'left': $(this.options.element).clientWidth * -1};
-                    this.inStyle = {'left': [this.startStyle.left,0]};
+                    this.inStyle = {'left': 0};
                 break;
                 case 'fade':
                     this.startStyle = {'opacity': 0};
@@ -182,19 +177,19 @@ Mooquee = new Class({
         switch(newTrans.tout){
                 case 'up':
                     this.outStyle = {'top': $(this.options.element).clientHeight * -1};
-                    this.resetStyle = {'top': [this.outStyle.left,0]};
+                    this.resetStyle = {'top': 0};
                 break;
                 case 'down':
                     this.outStyle = {'top': $(this.options.element).clientHeight};
-                    this.resetStyle = {'top': [this.outStyle.left,0]};
+                    this.resetStyle = {'top': 0};
                 break;
                 case 'left':
                     this.outStyle = {'left': $(this.options.element).clientWidth * -1};
-                    this.resetStyle = {'left': [this.outStyle.left,0]};
+                    this.resetStyle = {'left': 0};
                 break;
                 case 'right':
                     this.outStyle = {'left': $(this.options.element).clientWidth};
-                    this.resetStyle = {'left': [this.outStyle.left,0]};
+                    this.resetStyle = {'left': 0};
                 break;
                 case 'fade':
                     this.outStyle = {'opacity': 0};
