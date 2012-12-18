@@ -138,7 +138,7 @@ Mooquee = new Class({
 						if(this.loop == true)
 							this.loopTimer = this.mooveAll.delay(this.pause ,this);
 					}.bind(this));
-				}).delay(this.inDelay*this.pause ,this);
+				}.bind(this))();
 
 			}
 		}else{
@@ -151,7 +151,6 @@ Mooquee = new Class({
         this.inStyle = {};
         this.outStyle = {};
         this.resetStyle = {};
-        this.inDelay = 0;
         switch(newTrans.tin){
                 case 'up':
                     this.startStyle = {'top': $(this.options.element).clientHeight};
@@ -194,7 +193,6 @@ Mooquee = new Class({
                 case 'fade':
                     this.outStyle = {'opacity': 0};
                     this.resetStyle = {'opacity': 1};
-                    this.inDelay = .5;
                 break;
         }
         this.setMooqueeItems();
