@@ -77,8 +77,8 @@ class Mooquee4ward extends Hybrid
 		$this->Template->images = $images;
 		$this->Template->mooquee4wardFirstitem = ($this->mooquee4wardFirstitem == 'random') ? array_rand($images) : $this->mooquee4wardFirstitem;
 		if($this->mooquee4wardFirstitem == 'continue') {
-			if ($_COOKIE['currentSlide']) { 
-				$this->Template->firstitem = $_COOKIE['currentSlide']; 
+			if ($this->Input->cookie('currentSlide')) { 
+				$this->Template->firstitem = $this->Input->cookie('currentSlide'); 
 			} else {
 				$this->Template->firstitem = 0;
 			}
