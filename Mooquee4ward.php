@@ -76,6 +76,13 @@ class Mooquee4ward extends Hybrid
 		
 		$this->Template->images = $images;
 		$this->Template->mooquee4wardFirstitem = ($this->mooquee4wardFirstitem == 'random') ? array_rand($images) : $this->mooquee4wardFirstitem;
+		if($this->mooquee4wardFirstitem == 'continue') {
+			if ($_COOKIE['currentSlide']) { 
+				$this->Template->firstitem = $_COOKIE['currentSlide']; 
+			} else {
+				$this->Template->firstitem = 0;
+			}
+		}
 		$this->Template->imgSize = deserialize($this->size);
 	}
 
@@ -201,6 +208,7 @@ $strJS .= '
 		{
 
 $strJS .= '			onTransitionComplete: function(ci,pi){
+				Cookie.write(\'currentSlide\', ci); 
 				var els = $$(\'#mooquee'.$objSettings->id.' div.mooqueeNav a\');
 				els.removeClass(\'active\');
 				els[ci].addClass(\'active\');

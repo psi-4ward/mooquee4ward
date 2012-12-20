@@ -101,7 +101,7 @@ $GLOBALS['TL_DCA']['tl_module']['fields']['mooquee4wardFirstitem'] = array
 	'label'                   => &$GLOBALS['TL_LANG']['tl_module']['mooquee4wardFirstitem'],
 	'exclude'                 => true,
 	'inputType'               => 'select',
-	'options'				  => array('0'=>'0','1'=>'1','2'=>'2','3'=>'3','4'=>'4','5'=>'5','6'=>'6','7'=>'7','8'=>'8','9'=>'9','random'=>'random'),
+	'options'				  => array('0'=>'0','1'=>'1','2'=>'2','3'=>'3','4'=>'4','5'=>'5','6'=>'6','7'=>'7','8'=>'8','9'=>'9','random'=>'random','continue' => 'continue'),
 	'eval'                    => array('mandatory'=>true,'tl_class'=>'w50')
 );
 $GLOBALS['TL_DCA']['tl_module']['fields']['mooquee4wardPauseOnHover'] = array
