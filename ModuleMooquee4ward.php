@@ -44,7 +44,7 @@ class ModuleMooquee4ward extends Mooquee4ward
 
 	public function generate()
 	{
-		$this->size = $this->imgSize;
+		$this->imgSize = deserialize($this->imgSize,true);
 		return parent::generate();
 	}
 }
