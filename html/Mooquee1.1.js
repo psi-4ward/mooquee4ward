@@ -137,19 +137,18 @@ Mooquee = new Class({
 				(function(){
 					this.itemFXs[this.currentitem].start(this.inStyle).chain(function(){
 						this.options.onTransitionComplete(this.returncurrentitem,this.returnpreviousitem);
-						if(this.loop == true)
+						if(this.loop === true)
 							this.loopTimer = this.mooveAll.delay(this.pause ,this);
 					}.bind(this));
 				}.bind(this))();
 
 			}
-		}else{
-			this.moove.delay(50 ,this,itemnumber);	
+		} else{
+			this.moove.delay(50 ,this,itemnumber);
 		}
-		
 	},
     setTrans: function(newTrans){
-        this.startStyle = {}
+        this.startStyle = {};
         this.inStyle = {};
         this.outStyle = {};
         this.resetStyle = {};
@@ -198,7 +197,7 @@ Mooquee = new Class({
                 break;
         }
         this.setMooqueeItems();
-    	},
+    },
 	pauseM: function(){
 		if(this.previousitem != -1){
 			this.itemFXs[this.previousitem].pause();
@@ -233,7 +232,7 @@ Mooquee = new Class({
 		this.duration = this.options.duration;
 		this.itemFXs = [];
 		this.outDelay = 0;
-        	this.inDelay = 0;
+        this.inDelay = 0;
 		this.started = false;
 		this.currentitem = this.options.firstitem;
 		this.previousitem=-1;
