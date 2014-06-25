@@ -194,7 +194,7 @@ $strJS .= '
 					\'onclick\':\'objMooquee'.$objSettings->id.'.moove(\'+i+\');return false;\',
 					\'href\':\'#\',
 					\'class\':((i==0) ? \'active\' : \'\'),
-					\'text\':i
+					\'text\':i+1
 				}).inject(mooqueeNav);
 				mooqueeNav.set(\'html\',mooqueeNav.get(\'html\')+\' \');
 			}
