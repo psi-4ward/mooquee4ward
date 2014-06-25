@@ -91,10 +91,25 @@ class Mooquee4ward extends Hybrid
 		{
 			$this->parseMetaFile($file);
 			// Scan folder an sort resources
-			$images = scan(TL_ROOT . '/' . $file);
-			natcasesort($images);
-			foreach($images as $k=>$img) $images[$k] = $file.'/'.$img;
-			$images = array_values($images);
+			$folderImages = scan(TL_ROOT . '/' . $file);
+			natcasesort($folderImages);
+
+			// if there is a meta file, use it's sorting
+			$images = array();
+			foreach($this->arrMeta as $fileName => $metadata) {
+				$folderImagesKey = array_search($fileName, $folderImages);
+				if(!$folderImagesKey) {
+					continue; // the image exists in the meta file, but not in the folder
+				}
+				array_push($images, $file . '/' . $fileName);
+				// remove from not-processed array
+				unset($folderImages[$folderImagesKey]);
+			}
+
+			// now handle app files, which weren't in a meta file
+			foreach($folderImages as $fileName) {
+				array_push($images, $file . '/' . $fileName);
+			}
 		}
 		else 
 		{
