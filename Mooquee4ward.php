@@ -218,7 +218,7 @@ $strJS .= '
 $strJS .= '			onTransitionComplete: function(ci,pi){
 				var els = $$(\'#mooquee'.$objSettings->id.' div.mooqueeNav a\');
 				els.removeClass(\'active\');
-				els[ci].addClass(\'active\');
+				if(els[ci]) els[ci].addClass(\'active\');
 			},';
 		}
 
