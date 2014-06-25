@@ -1,11 +1,11 @@
 /*
- * Mooquee 	  - mootools <marquee> tag replacement
- * Version	  - 1.1.1
+ * Mooquee       - mootools <marquee> tag replacement
+ * Version      - 1.1.1
  * Created By - Robert Inglin
  * Homepage   - http://robert.ingl.in/mooquee
  * Thanks to  - *mltsy* of Mooforum.net who wrote rewrote the 
-		    transition system to allow in and out style 
-		    transitions and included the fade transition
+            transition system to allow in and out style 
+            transitions and included the fade transition
  * License    - MIT License Agreement
 
 Copyright (c) 2008 Robert Inglin
@@ -33,120 +33,120 @@ OTHER DEALINGS IN THE SOFTWARE.
  */
 
 Mooquee = new Class({
-	Implements: [Options],
+    Implements: [Options],
 
-	options: {
-		element: 'mooquee',
-		cssitem: 'mooquee_item',
-		firstitem:0,
-		trans:{'tin':'left', 'tout':'left'}, //each transition is up, down, left, right, fade
-		pause: 1000, //milliseconds (keep pause equal or higher to duration to allow time for items to reset) -1 = infinite pause/no loop
-		duration: 1000, //number of milliseconds to move marquee items
-		overflow:'hidden', //if your item flows over how do you want to handle it. Auto(scroll) or Hidden work best...
-		startOnLoad:true, // will start marquee when loaded
-		pauseOnHover: true, //if true will pause all animations while mouse is hovering
-		onTransitionStart: function(){},// Executes on transition start
-		onTransitionComplete: function(curr){
-//			this.items.setStyle('z-index',100);
-//			this.items[curr].setStyle('z-index',1000);
-		}, // Executes on transition completion
-		onLoop: function(){}//Executes on full loop
-	},
-	initialize: function(options){
-		this.setOptions(options);
-		this.defaultVariables();
-		
-		if (typeof(this.options.trans) == "string") this.options.trans = {'tin':this.options.trans, 'tout':this.options.trans};
-		
-		var me = this;
-		window.addEvent('domready', function() {
-			me.items = $$('#' + me.options.element + ' .' + me.options.cssitem);//get all mooqueeItems
-			me.totalitems = me.items.length;
-			// if($(me.options.element).style.overflow != 'hidden')			$(me.options.element).style.overflow = 'hidden';
-			if($(me.options.element).style.position != 'relative')		$(me.options.element).style.position = 'relative';
+    options: {
+        element: 'mooquee',
+        cssitem: 'mooquee_item',
+        firstitem:0,
+        trans:{'tin':'left', 'tout':'left'}, //each transition is up, down, left, right, fade
+        pause: 1000, //milliseconds (keep pause equal or higher to duration to allow time for items to reset) -1 = infinite pause/no loop
+        duration: 1000, //number of milliseconds to move marquee items
+        overflow:'hidden', //if your item flows over how do you want to handle it. Auto(scroll) or Hidden work best...
+        startOnLoad:true, // will start marquee when loaded
+        pauseOnHover: true, //if true will pause all animations while mouse is hovering
+        onTransitionStart: function(){},// Executes on transition start
+        onTransitionComplete: function(curr){
+//            this.items.setStyle('z-index',100);
+//            this.items[curr].setStyle('z-index',1000);
+        }, // Executes on transition completion
+        onLoop: function(){}//Executes on full loop
+    },
+    initialize: function(options){
+        this.setOptions(options);
+        this.defaultVariables();
+        
+        if (typeof(this.options.trans) == "string") this.options.trans = {'tin':this.options.trans, 'tout':this.options.trans};
+        
+        var me = this;
+        window.addEvent('domready', function() {
+            me.items = $$('#' + me.options.element + ' .' + me.options.cssitem);//get all mooqueeItems
+            me.totalitems = me.items.length;
+            // if($(me.options.element).style.overflow != 'hidden')            $(me.options.element).style.overflow = 'hidden';
+            if($(me.options.element).style.position != 'relative')        $(me.options.element).style.position = 'relative';
 
-			me.setMooqueeFXs();
-			me.setTrans(me.options.trans);//has setMooqueeItems in it
+            me.setMooqueeFXs();
+            me.setTrans(me.options.trans);//has setMooqueeItems in it
 
-			if(me.options.startOnLoad)
-				me.startLoop();
-			if(me.options.pauseOnHover){
-				var element = $(me.options.element);
-				element.addEvent('mouseover', function(){ me.pauseM(); });
-				element.addEvent('mouseout', function(){ me.resume(); });
-			}
-		});
-		
-		
-	},
-	setMooqueeItems: function(){
-		this.resetting =true;
-		var i=0;
-		
-		this.items.each(function (element){
-			if($(element).style.position != 'absolute')
-				$(element).style.position = 'absolute';
-			$(element).style.width = $(this.options.element).clientWidth + 'px';
-			$(element).style.overflow = this.options.overflow;
+            if(me.options.startOnLoad)
+                me.startLoop();
+            if(me.options.pauseOnHover){
+                var element = $(me.options.element);
+                element.addEvent('mouseover', function(){ me.pauseM(); });
+                element.addEvent('mouseout', function(){ me.resume(); });
+            }
+        });
+        
+        
+    },
+    setMooqueeItems: function(){
+        this.resetting =true;
+        var i=0;
+        
+        this.items.each(function (element){
+            if($(element).style.position != 'absolute')
+                $(element).style.position = 'absolute';
+            $(element).style.width = $(this.options.element).clientWidth + 'px';
+            $(element).style.overflow = this.options.overflow;
 
-			if(i == this.currentitem)
-				this.itemFXs[i].set(this.resetStyle).set(this.inStyle);
-			else
-				this.itemFXs[i].set(this.resetStyle).set(this.startStyle);
-			i++;
+            if(i == this.currentitem)
+                this.itemFXs[i].set(this.resetStyle).set(this.inStyle);
+            else
+                this.itemFXs[i].set(this.resetStyle).set(this.startStyle);
+            i++;
 
-		}.bind(this));
-		this.resetting =false;
-	},
-	setMooqueeFXs: function(){
-		var i=0;
-		this.items.each(function (element){
-			this.itemFXs[i] = new Fx.Morph(element,{duration:(this.options.duration),transition:this.options.transition});
-			i++;
-		}.bind(this));
-	},
-	mooveAll: function(){
-		if((this.currentitem + 1) == this.totalitems){
-			citem = 0;
-			this.options.onLoop();
-		}else
-			citem = this.currentitem + 1;
-		this.moove(citem);
-	},
-	moove: function(itemnumber){
-		if(itemnumber < this.totalitems)
-		if(!this.mousedOver){
-			if(itemnumber != this.currentitem){
-				$clear(this.loopTimer);
-				if(this.previousitem != -1){
-					this.itemFXs[this.previousitem].cancel().set(this.resetStyle).set(this.startStyle);
-					this.itemFXs[this.currentitem].cancel().set(this.resetStyle).set(this.inStyle);
-					this.previousitem=-1;
-				}
-				this.returnpreviousitem = this.previousitem = this.currentitem;
-				this.returncurrentitem = this.currentitem = itemnumber;
-				this.options.onTransitionStart(this.returncurrentitem,this.returnpreviousitem);
+        }.bind(this));
+        this.resetting =false;
+    },
+    setMooqueeFXs: function(){
+        var i=0;
+        this.items.each(function (element){
+            this.itemFXs[i] = new Fx.Morph(element,{duration:(this.options.duration),transition:this.options.transition});
+            i++;
+        }.bind(this));
+    },
+    mooveAll: function(){
+        if((this.currentitem + 1) == this.totalitems){
+            citem = 0;
+            this.options.onLoop();
+        }else
+            citem = this.currentitem + 1;
+        this.moove(citem);
+    },
+    moove: function(itemnumber){
+        if(itemnumber < this.totalitems)
+        if(!this.mousedOver){
+            if(itemnumber != this.currentitem){
+                $clear(this.loopTimer);
+                if(this.previousitem != -1){
+                    this.itemFXs[this.previousitem].cancel().set(this.resetStyle).set(this.startStyle);
+                    this.itemFXs[this.currentitem].cancel().set(this.resetStyle).set(this.inStyle);
+                    this.previousitem=-1;
+                }
+                this.returnpreviousitem = this.previousitem = this.currentitem;
+                this.returncurrentitem = this.currentitem = itemnumber;
+                this.options.onTransitionStart(this.returncurrentitem,this.returnpreviousitem);
 
-				this.itemFXs[this.previousitem].start(this.outStyle).chain(function(){
-					if(!this.resetting){
-						this.itemFXs[this.previousitem].set(this.resetStyle).set(this.startStyle);
-						this.previousitem=-1;
-					}
-				}.bind(this));
+                this.itemFXs[this.previousitem].start(this.outStyle).chain(function(){
+                    if(!this.resetting){
+                        this.itemFXs[this.previousitem].set(this.resetStyle).set(this.startStyle);
+                        this.previousitem=-1;
+                    }
+                }.bind(this));
 
-				(function(){
-					this.itemFXs[this.currentitem].start(this.inStyle).chain(function(){
-						this.options.onTransitionComplete(this.returncurrentitem,this.returnpreviousitem);
-						if(this.loop === true)
-							this.loopTimer = this.mooveAll.delay(this.pause ,this);
-					}.bind(this));
-				}.bind(this))();
+                (function(){
+                    this.itemFXs[this.currentitem].start(this.inStyle).chain(function(){
+                        this.options.onTransitionComplete(this.returncurrentitem,this.returnpreviousitem);
+                        if(this.loop === true)
+                            this.loopTimer = this.mooveAll.delay(this.pause ,this);
+                    }.bind(this));
+                }.bind(this))();
 
-			}
-		} else{
-			this.moove.delay(50 ,this,itemnumber);
-		}
-	},
+            }
+        } else{
+            this.moove.delay(50 ,this,itemnumber);
+        }
+    },
     setTrans: function(newTrans){
         this.startStyle = {};
         this.inStyle = {};
@@ -198,43 +198,43 @@ Mooquee = new Class({
         }
         this.setMooqueeItems();
     },
-	pauseM: function(){
-		if(this.previousitem != -1){
-			this.itemFXs[this.previousitem].pause();
-			this.itemFXs[this.currentitem].pause();
-		}
-		this.mousedOver = true;
-	},
-	resume: function(){
-		if(this.previousitem != -1){
-			this.itemFXs[this.previousitem].resume();
-			this.itemFXs[this.currentitem].resume();
-		}
-		this.mousedOver = false;
-	},
-	stopLoop: function(){
-		this.loop = false;
-		this.pause = 2;
-	},
-	startLoop: function(pause,duration){
-		if(pause)this.pause = pause;
-		this.loop = true;
-		this.loopTimer = this.mooveAll.delay(this.pause ,this);
-	},
-	defaultVariables: function(){
-		if(this.options.pause!=-1){
-			this.loop = true;
-			this.pause = this.options.pause;
-		}else{
-			this.loop = false;
-			this.pause = 2;
-		}
-		this.duration = this.options.duration;
-		this.itemFXs = [];
-		this.outDelay = 0;
+    pauseM: function(){
+        if(this.previousitem != -1){
+            this.itemFXs[this.previousitem].pause();
+            this.itemFXs[this.currentitem].pause();
+        }
+        this.mousedOver = true;
+    },
+    resume: function(){
+        if(this.previousitem != -1){
+            this.itemFXs[this.previousitem].resume();
+            this.itemFXs[this.currentitem].resume();
+        }
+        this.mousedOver = false;
+    },
+    stopLoop: function(){
+        this.loop = false;
+        this.pause = 2;
+    },
+    startLoop: function(pause,duration){
+        if(pause)this.pause = pause;
+        this.loop = true;
+        this.loopTimer = this.mooveAll.delay(this.pause ,this);
+    },
+    defaultVariables: function(){
+        if(this.options.pause!=-1){
+            this.loop = true;
+            this.pause = this.options.pause;
+        }else{
+            this.loop = false;
+            this.pause = 2;
+        }
+        this.duration = this.options.duration;
+        this.itemFXs = [];
+        this.outDelay = 0;
         this.inDelay = 0;
-		this.started = false;
-		this.currentitem = this.options.firstitem;
-		this.previousitem=-1;
-	}
+        this.started = false;
+        this.currentitem = this.options.firstitem;
+        this.previousitem=-1;
+    }
 });
