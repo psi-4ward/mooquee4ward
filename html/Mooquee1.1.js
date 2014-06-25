@@ -58,22 +58,24 @@ Mooquee = new Class({
 		
 		if (typeof(this.options.trans) == "string") this.options.trans = {'tin':this.options.trans, 'tout':this.options.trans};
 		
+		var me = this;
 		window.addEvent('domready', function() {
-			this.items = $$('#' + this.options.element + ' .' + this.options.cssitem);//get all mooqueeItems
-			this.totalitems = this.items.length;
-			// if($(this.options.element).style.overflow != 'hidden')			$(this.options.element).style.overflow = 'hidden';
-			if($(this.options.element).style.position != 'relative')		$(this.options.element).style.position = 'relative';
+			me.items = $$('#' + me.options.element + ' .' + me.options.cssitem);//get all mooqueeItems
+			me.totalitems = me.items.length;
+			// if($(me.options.element).style.overflow != 'hidden')			$(me.options.element).style.overflow = 'hidden';
+			if($(me.options.element).style.position != 'relative')		$(me.options.element).style.position = 'relative';
 
-			this.setMooqueeFXs();
-			this.setTrans(this.options.trans);//has setMooqueeItems in it
+			me.setMooqueeFXs();
+			me.setTrans(me.options.trans);//has setMooqueeItems in it
 
-			if(this.options.startOnLoad)
-				this.startLoop();
-			if(this.options.pauseOnHover){
-				$(this.options.element).addEvent('mouseover',function(){this.pauseM()}.bind(this));
-				$(this.options.element).addEvent('mouseout',function(){this.resume()}.bind(this));
+			if(me.options.startOnLoad)
+				me.startLoop();
+			if(me.options.pauseOnHover){
+				var element = $(me.options.element);
+				element.addEvent('mouseover', function(){ me.pauseM(); });
+				element.addEvent('mouseout', function(){ me.resume(); });
 			}
-		}.bind(this));
+		});
 		
 		
 	},
