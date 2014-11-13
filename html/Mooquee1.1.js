@@ -117,7 +117,7 @@ Mooquee = new Class({
         if(itemnumber < this.totalitems)
         if(!this.mousedOver){
             if(itemnumber != this.currentitem){
-                $clear(this.loopTimer);
+                clearTimeout(this.loopTimer);
                 if(this.previousitem != -1){
                     this.itemFXs[this.previousitem].cancel().set(this.resetStyle).set(this.startStyle);
                     this.itemFXs[this.currentitem].cancel().set(this.resetStyle).set(this.inStyle);
