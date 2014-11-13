@@ -71,7 +71,15 @@ class Mooquee4ward extends Hybrid
 		$multiSRC = unserialize($this->multiSRC);
 		foreach($multiSRC as $file)
 		{
-			$images = array_merge($images,$this->fetchImages($file));
+            if (version_compare(VERSION, '3.0', '>=')) {
+                if (($fileModel = FilesModel::findByPk($file)) === null) {
+                    continue;
+                }
+
+                $file = $fileModel->path;
+            }
+
+			$images = array_merge($images, $this->fetchImages($file));
 		}
 		
 		$this->Template->images = $images;
